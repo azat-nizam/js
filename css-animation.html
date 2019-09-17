@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Css</title>
+    <style>
+        .base {
+            width: 400px;
+            height: 0px;
+            background-color: #ea55ea;
+        }
+        .rollback {
+            height: 0px;
+            animation-name: slideout;
+            animation-duration: 0.5s;
+        }
+        .animate {
+            height: 300px;
+            animation-name: slidein;
+            animation-duration: 0.5s;
+        }
+        @keyframes slidein {
+            from {
+                height: 0px;
+            }
+            to {
+                height: 300px;
+            }
+        }
+        @keyframes slideout {
+            from {
+                height: 300px;
+            }
+            to {
+                height: 0px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="btn">Toggle</button><br /><br />
+    <div class="base"></div>
+    <script>
+        var btn = document.querySelector(".btn");
+
+        btn.addEventListener("click", function() {
+            animateEl = document.querySelector(".base");
+
+            if ( !animateEl.classList.contains("animate") && !animateEl.classList.contains("rollback") ) {
+                animateEl.classList.toggle("animate");
+            } else if ( animateEl.classList.contains("animate") && !animateEl.classList.contains("rollback") ) {
+                animateEl.classList.toggle("animate");
+                animateEl.classList.toggle("rollback");
+            } else if ( !animateEl.classList.contains("animate") && animateEl.classList.contains("rollback") ) {
+                animateEl.classList.toggle("rollback");
+                animateEl.classList.toggle("animate");
+            }
+            
+        }, false);
+    </script>
+</body>
+</html>
