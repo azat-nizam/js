@@ -1,28 +1,31 @@
 /**
  * Investigate fetch standart (native ajax)
- * [!] has error
+ * http://learn.javascript.ru/fetch
  */
 console.log("loaded");
 
 btnEl = document.querySelector(".btn");
 
 btnEl.addEventListener("click", function() {
+    data = {};
 
-    fetch("server.json")
-        .then(function(response) {  
-            if (response.status !== 200) {  
-                console.log('Looks like there was a problem. Status Code: ' +  
-                response.status);  
-                return;  
+    fetch("server.json", {
+            method: "POST",
+            cache: "no-cache",
+            data
+        })
+        .then(function(response) {
+            /** process response status */
+            if (response.ok) {
+                console.log(response.status);
             }
 
-            // Examine the text in the response  
-            response.then(function(data) {
-            console.log(data);
-            });  
-        })  
-        .catch(function(err) {  
-            console.log('Fetch Error :-S', err);  
+            return response.json();
+        })
+        // .then( console.log )
+        .then( resbody => console.log(resbody) ) // process response body
+        .catch(function(err) {
+            console.log(err);
         });
 
 }, false);
